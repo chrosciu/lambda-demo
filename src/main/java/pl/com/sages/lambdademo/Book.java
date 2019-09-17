@@ -14,4 +14,8 @@ public class Book {
     private String author;
     private int year;
     private int rate;
+
+    public boolean checkTitle() {
+        return title != null;
+    }
 }
