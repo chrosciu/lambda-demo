@@ -77,7 +77,7 @@ public class BookProcessor {
         Stream<Book> existingBooksStream = booksStream.filter(Objects::nonNull);
         Stream<String> titlesStream = existingBooksStream.map(Book::getTitle);
         Stream<String> existingTitlesStream = titlesStream.filter(Objects::nonNull);
-        Stream<String> longTitlesStream = existingTitlesStream.filter(s -> s.length() > 10);
+        Stream<String> longTitlesStream = existingTitlesStream.filter(BookProcessor::isTitleLongEnough);
         List<String> titles = longTitlesStream.collect(Collectors.toList());
         return titles;
     }
@@ -87,8 +87,12 @@ public class BookProcessor {
         .filter(Objects::nonNull)
         .map(Book::getTitle)
         .filter(Objects::nonNull)
-        .filter(s -> s.length() > 10)
+        .filter(BookProcessor::isTitleLongEnough)
         .collect(Collectors.toList());
+    }
+
+    private static boolean isTitleLongEnough(String title) {
+        return title.length() > 10;
     }
 
     //prepare list of books descriptions (can use @ToString on book) but discard books with no author or no title
