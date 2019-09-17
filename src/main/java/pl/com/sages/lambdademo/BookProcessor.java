@@ -1,8 +1,10 @@
 package pl.com.sages.lambdademo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -99,4 +101,23 @@ public class BookProcessor {
     public static List<String> prepareBookDescriptions(List<Book> books) {
         return null;
     }
+
+    public static void main(String[] args) {
+        List<Integer> numbers = List.of(3, 7, 9, 6, 4);
+        Optional<Integer> maxNumber = numbers.stream().max(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                //return o1 - o2;
+                if (o1 < o2) {
+                    return -1;
+                } else if (o1 > o2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        System.out.println((maxNumber.get()));
+    }
+
 }
